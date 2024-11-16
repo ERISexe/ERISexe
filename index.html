@@ -1,0 +1,156 @@
+<html><head><base href="." /></head>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+body {
+  margin: 0;
+  background: #000;
+  color: #ff69b4;
+  font-family: 'VT323', monospace;
+  overflow: hidden;
+}
+
+.chaos-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(45deg, #ff69b4, #ff1493);
+  animation: glitch 2s infinite ease-in-out;
+}
+
+.eris-symbol {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  animation: rotate 10s linear infinite;
+}
+
+.golden-apple {
+  position: absolute;
+  animation: float 3s ease-in-out infinite;
+}
+
+.coming-soon {
+  position: absolute;
+  top: 5%;
+  width: 100%;
+  text-align: center;
+  font-size: 8em;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: black;
+  text-shadow: 
+    2px 2px #ff69b4,
+    -2px -2px #ff1493;
+  animation: bigGlitch 4s infinite ease-in-out;
+  z-index: 100;
+}
+
+@keyframes bigGlitch {
+  0% { transform: skew(0deg); filter: blur(0); }
+  2% { transform: skew(-2deg); filter: blur(1px); }
+  4% { transform: skew(2deg); filter: blur(0); }
+  6% { transform: skew(0deg); filter: blur(2px); }
+  8% { transform: skew(1deg); filter: blur(0); }
+  10% { transform: skew(0deg); filter: blur(0); }
+  90% { transform: skew(0deg); filter: blur(0); }
+  92% { transform: skew(3deg); filter: blur(2px); }
+  94% { transform: skew(-3deg); filter: blur(0); }
+  96% { transform: skew(0deg); filter: blur(1px); }
+  98% { transform: skew(-1deg); filter: blur(0); }
+  100% { transform: skew(0deg); filter: blur(0); }
+}
+
+@keyframes glitch {
+  0% { filter: hue-rotate(0deg) blur(0px); }
+  25% { filter: hue-rotate(45deg) blur(0.5px); }
+  50% { filter: hue-rotate(90deg) blur(0px); }
+  75% { filter: hue-rotate(45deg) blur(0.7px); }
+  100% { filter: hue-rotate(0deg) blur(0px); }
+}
+
+@keyframes rotate {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.glitch-text {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  font-size: 3em;
+  text-shadow: 1px 1px #ff1493,
+               -1px -1px #00ff00;
+  animation: textGlitch 3s infinite ease-in-out;
+}
+
+@keyframes textGlitch {
+  0% { transform: skew(0deg); }
+  20% { transform: skew(2deg); }
+  40% { transform: skew(-2deg); }
+  60% { transform: skew(1deg); }
+  80% { transform: skew(-1deg); }
+  100% { transform: skew(0deg); }
+}
+</style>
+
+<div class="chaos-container">
+  <svg class="eris-symbol" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="45" fill="none" stroke="#ff69b4" stroke-width="2"/>
+    <path d="M50 5 L50 95 M5 50 L95 50 M15 15 L85 85 M15 85 L85 15" 
+          stroke="#ff69b4" stroke-width="2"/>
+    <circle cx="50" cy="50" r="10" fill="#ff1493"/>
+  </svg>
+  
+  <svg class="golden-apple" width="50" height="50" viewBox="0 0 50 50"
+       style="position: absolute; left: 75%; top: 25%;">
+    <circle cx="25" cy="25" r="20" fill="#ffd700"/>
+    <path d="M25 5 C15 5 5 15 5 25 C5 40 25 45 25 45 C25 45 45 40 45 25 C45 15 35 5 25 5"
+          stroke="#ff69b4" stroke-width="2" fill="none"/>
+  </svg>
+
+  <div class="glitch-text" style="top: 20%">KALLISTI</div>
+  <div class="glitch-text" style="top: 70%">HAIL ERIS</div>
+  
+  <div class="coming-soon">cummmmmming soooon</div>
+</div>
+
+<script>
+document.addEventListener('mousemove', (e) => {
+  const x = e.clientX / window.innerWidth;
+  const y = e.clientY / window.innerHeight;
+  
+  document.querySelector('.chaos-container').style.filter = 
+    `hue-rotate(${x * 180}deg) blur(${y * 1}px)`;
+});
+
+// Create chaos particles
+for (let i = 0; i < 23; i++) {
+  const particle = document.createElement('div');
+  particle.style.position = 'absolute';
+  particle.style.width = '2px';
+  particle.style.height = '2px';
+  particle.style.background = '#ff69b4';
+  particle.style.left = Math.random() * 100 + 'vw';
+  particle.style.top = Math.random() * 100 + 'vh';
+  particle.style.animation = `float ${Math.random() * 5 + 2}s infinite`;
+  document.querySelector('.chaos-container').appendChild(particle);
+}
+
+// Add subtle glitch effect on click
+document.addEventListener('click', () => {
+  const container = document.querySelector('.chaos-container');
+  container.style.animation = 'none';
+  container.offsetHeight; // Trigger reflow
+  container.style.animation = 'glitch 2s infinite ease-in-out';
+});
+</script>
+</html>
