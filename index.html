@@ -1,4 +1,4 @@
-<html><head><base href="." /></head>
+<html><head><base href="." />
 <style>
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
@@ -47,6 +47,32 @@ body {
     -2px -2px #ff1493;
   animation: bigGlitch 4s infinite ease-in-out;
   z-index: 100;
+}
+
+.nav-links {
+  position: fixed;
+  bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  z-index: 1000;
+}
+
+.nav-links a {
+  color: #ff69b4;
+  text-decoration: none;
+  font-size: 1.5em;
+  text-transform: uppercase;
+  padding: 5px 15px;
+  border: 2px solid #ff69b4;
+  transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+  background: #ff69b4;
+  color: black;
+  transform: skew(-5deg);
 }
 
 @keyframes bigGlitch {
@@ -121,6 +147,15 @@ body {
   <div class="glitch-text" style="top: 70%">HAIL ERIS</div>
   
   <div class="coming-soon">cummmmmming soooon</div>
+
+  <div class="nav-links">
+    <a href="https://twitter.com/exe_eris">Twitter</a>
+    <a href="https://t.me/ERISexe">Telegram</a>
+    <a href="https://pump.fun">Buy</a>
+    <a href="#">Backrooms</a>
+    <a href="https://discord.gg/feFJdw9azs">Discord</a>
+    <a href="#">Info</a>
+  </div>
 </div>
 
 <script>
